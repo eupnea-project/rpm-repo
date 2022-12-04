@@ -37,3 +37,4 @@ jobs:
           create_branch: true
           # Only include needed files
           file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg'
+          push_options: '--force'
