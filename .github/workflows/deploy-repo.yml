@@ -19,13 +19,14 @@ jobs:
         with:
           fetch-depth: 1
       - name: Installing dependencies
-        run: sudo apt install -y rpm createrepo-c
+        run: sudo apt-get install -y rpm createrepo-c
 
       - name: Packing rpm package
         run: rpmbuild -bb eupnea-utils.spec
 
       - name: Creating repo
-        run: bash create-repo.sh
+   #     run: bash create-repo.sh
+        run: sudo ls -a
 
       - name: Deploying repo
         uses: stefanzweifel/git-auto-commit-action@v4
