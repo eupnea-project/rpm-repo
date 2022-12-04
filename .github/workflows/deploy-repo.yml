@@ -1,0 +1,31 @@
+name: Deploying apt repo
+on:
+  push:
+    branches: [ "main" ]
+  schedule:
+    - cron: "10 0 * * *" # run at the start of every day after postinstall scripts repo update
+  workflow_dispatch:
+
+jobs:
+  deploy-repo:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Creating rpm package
+        run: bash pack-rpm.sh
+
+      - name: Creating repo
+        run: bash create-repo.sh
+      
+      - name: Deploying repo
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Deploying rpm-repo
+          branch: gh-pages
+          create_branch: true
