@@ -1,0 +1,6 @@
+[eupnea-utils]
+name=Eupnea-utils rpm repository
+baseurl=https://eupnea-linux.github.io/rpm-repo/
+gpgkey=https://eupnea-linux.github.io/rpm-repo/public_key.gpg
+enabled=1
+gpgcheck=1
