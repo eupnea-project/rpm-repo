@@ -26,7 +26,7 @@ jobs:
         run: bash create-repo.sh
 
       - name: Deploying repo
-      - uses: stefanzweifel/git-auto-commit-action@v4
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
