@@ -36,4 +36,4 @@ jobs:
           branch: gh-pages
           create_branch: true
           # Only include needed files
-          file_pattern: 'repodata/* *.rpm'
+          file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg'
