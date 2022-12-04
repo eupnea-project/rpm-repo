@@ -2,7 +2,6 @@ Name:       eupnea-utils
 Version:    0.0.1
 Release:    1%{?dist}
 Summary:    Eupnea utilities
-Source0:    %{name}.tar.xz
 License:    GPLv3+
 ExclusiveArch:   x86_64
 Requires:    vboot-utils
