@@ -11,6 +11,8 @@ echo "$private_key" > gpg-private-key.gpg
 
 # import gpg private key
 gpg --import gpg-private-key.gpg
+# Dump public key into a file
+echo "$public_key" > public_key.gpg
 
 # Copy built rpms to the current directory
 cp ~/rpmbuild/RPMS/*/*.rpm .
@@ -23,6 +25,3 @@ createrepo_c .
 
 # Sign repodata
 gpg --detach-sign --armor repodata/repomd.xml
-
-# Dump public key into a file
-echo "$public_key" > public_key.gpg
