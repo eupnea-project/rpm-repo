@@ -25,8 +25,7 @@ jobs:
         run: rpmbuild -bb eupnea-utils.spec
 
       - name: Creating repo
-   #     run: bash create-repo.sh
-        run: sudo ls -a
+        run: bash create-repo.sh
 
       - name: Deploying repo
         uses: stefanzweifel/git-auto-commit-action@v4
