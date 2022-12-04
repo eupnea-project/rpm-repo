@@ -1,4 +1,4 @@
-name: Deploying apt repo
+name: Deploying rpm repo
 on:
   push:
     branches: [ "main" ]
