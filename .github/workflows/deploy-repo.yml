@@ -36,5 +36,14 @@ jobs:
           branch: gh-pages
           create_branch: true
           # Only include needed files
-          file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg'
+          file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg eupnea-utils.sha256'
           push_options: '--force'
+
+      - name: Updating sha256sums
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Updating sha256sums
+          # Only include needed files
+          file_pattern: 'eupnea-utils.sha256'
