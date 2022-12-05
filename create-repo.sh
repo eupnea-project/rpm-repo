@@ -14,6 +14,7 @@ if sha256sum -c eupnea-utils.sha256; then
 fi
 
 # Calculate sha256sum of new rpms
+echo "Calculating new sha256sums"
 sha256sum eupnea-utils-*.rpm >eupnea-utils.sha256
 
 # Set gpg rpm signing key id
