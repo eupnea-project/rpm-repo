@@ -7,7 +7,7 @@ cp ~/rpmbuild/RPMS/*/*.rpm .
 
 # Check if sha256sum of old and new rpms are the same
 # Exit if they match
-if sha256 -c eupnea-utils.sha256; then
+if sha256sum -c eupnea-utils.sha256; then
   echo "RPM checksum matches -> no update needed"
   echo "Exiting"
   exit 0
