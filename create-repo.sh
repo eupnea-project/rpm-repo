@@ -2,17 +2,6 @@
 # This script creates an rpm repository layout in the current directory.
 set -e
 
-# Copy built rpms to the current directory
-cp ~/rpmbuild/RPMS/*/*.rpm .
-
-# Check if sha256sum of old and new rpms are the same
-# Exit if they match
-if sha256sum -c eupnea-utils.sha256; then
-  echo "RPM checksum matches -> no update needed"
-  echo "Exiting"
-  exit 0
-fi
-
 # Calculate sha256sum of new rpms
 echo "Calculating new sha256sums"
 sha256sum eupnea-utils-*.rpm >eupnea-utils.sha256
@@ -28,6 +17,9 @@ echo "$private_key" >gpg-private-key.gpg
 gpg --import gpg-private-key.gpg
 # Dump public key into a file
 echo "$public_key" >public_key.gpg
+
+# Copy built rpms to the current directory
+cp ~/rpmbuild/RPMS/*/*.rpm .
 
 # Sign rpms
 rpm --addsign ./*.rpm

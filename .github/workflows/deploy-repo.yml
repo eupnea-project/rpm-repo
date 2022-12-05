@@ -21,20 +21,17 @@ jobs:
       - name: Installing dependencies
         run: sudo apt-get install -y rpm createrepo-c
 
+      - name: Bump version in spec file
+        run: |
+          CURRENT_VERSION=$(sed -n '2p' eupnea-utils.spec | sed 's/.*://' | xargs) # get current version from spec file
+          NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-utils.spec # update version in spec file
+
       - name: Packing rpm package
         run: rpmbuild -bb eupnea-utils.spec
 
       - name: Creating repo
         run: bash create-repo.sh
-
-      - name: Updating sha256sums
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          # Optional. Commit message for the created commit.
-          # Defaults to "Apply automatic changes"
-          commit_message: Updating sha256sums
-          # Only include needed files
-          file_pattern: 'eupnea-utils.sha256'
 
       - name: Deploying repo
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -45,5 +42,5 @@ jobs:
           branch: gh-pages
           create_branch: true
           # Only include needed files
-          file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg eupnea-utils.sha256'
+          file_pattern: 'repodata/* *.rpm eupnea-utils.repo public_key.gpg eupnea-utils.spec'
           push_options: '--force'
