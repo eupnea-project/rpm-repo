@@ -2,10 +2,6 @@
 # This script creates an rpm repository layout in the current directory.
 set -e
 
-# Calculate sha256sum of new rpms
-echo "Calculating new sha256sums"
-sha256sum eupnea-utils-*.rpm >eupnea-utils.sha256
-
 # Set gpg rpm signing key id
 echo "%_signature gpg
 %_gpg_name C2FD94D27193AF9D55E351C529CA5218233BC283" >~/.rpmmacros
