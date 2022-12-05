@@ -33,12 +33,21 @@ jobs:
       - name: Creating repo
         run: bash create-repo.sh
 
+      - name: Updating spec fie
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Update spec file
+          # Only include needed files
+          file_pattern: 'eupnea-utils.spec'
+
       - name: Deploying repo
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
-          commit_message: Deploying rpm-repo
+          commit_message: Deploy rpm-repo
           branch: gh-pages
           create_branch: true
           # Only include needed files
