@@ -55,13 +55,13 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Installing dependencies
+        run: sudo apt-get install -y rpm createrepo-c
+
       - name: Update local commits sha file
         run: |
           combined_remote_shas=
           echo "${{ needs.check-shas.outputs.postinstall_remote_sha }}"$'\n'"${{ needs.check-shas.outputs.audio_remote_sha }}" > ./sha_cache.txt
-
-      - name: Installing dependencies
-        run: sudo apt-get install -y rpm createrepo-c
 
       - name: Bump version in spec file
         run: |
