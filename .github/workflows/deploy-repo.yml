@@ -40,9 +40,9 @@ jobs:
             echo "match_results=false" >> $GITHUB_OUTPUT
           fi
 
-          # Combine remote shas into one string with a line break (for writing to a file in the next job)
-          combined_remote_shas="$postinstall_latest_sha"$'\n'"$audio_latest_sha"
-          echo "combined_remote_shas=$combined_remote_shas" >> $GITHUB_OUTPUT
+          # Add shas to output
+          echo "postinstall_remote_sha=$postinstall_latest_sha" >> $GITHUB_OUTPUT
+          echo "audio_remote_sha=$audio_latest_sha" >> $GITHUB_OUTPUT
 
   deploy-repo:
     runs-on: ubuntu-22.04
@@ -54,6 +54,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 1
+
+      - name: Update local commits sha file
+        run: |
+          combined_remote_shas=
+          echo "${{ needs.check-shas.outputs.postinstall_remote_sha }}"$'\n'"${{ needs.check-shas.outputs.audio_remote_sha }}" > ./sha_cache.txt
 
       - name: Installing dependencies
         run: sudo apt-get install -y rpm createrepo-c
