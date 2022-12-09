@@ -18,7 +18,7 @@ git clone --depth=1 https://github.com/eupnea-linux/audio-scripts.git
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
-mkdir -p %{buildroot}/%{_libdir}/eupnea
+mkdir -p %{buildroot}/usr/lib/eupnea/
 mkdir -p %{buildroot}/%{_sysconfdir}/eupnea
 
 # Copy scripts to bin
