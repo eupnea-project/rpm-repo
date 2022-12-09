@@ -26,8 +26,8 @@ install -m 755 postinstall-scripts/user-scripts/* %{buildroot}/%{_bindir}/
 install -m 755 audio-scripts/setup-audio %{buildroot}/%{_bindir}/
 
 # Copy scripts to lib
-cp postinstall-scripts/system-scripts/* %{buildroot}/%{_libdir}/eupnea/
-cp postinstall-scripts/functions.py %{buildroot}/%{_libdir}/eupnea/
+cp postinstall-scripts/system-scripts/* %{buildroot}/usr/lib/eupnea/
+cp postinstall-scripts/functions.py %{buildroot}/usr/lib/eupnea/
 
 cp -r postinstall-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
@@ -39,7 +39,7 @@ cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 %{_bindir}/modify-cmdline
 %{_bindir}/setup-audio
 
-%{_libdir}/eupnea/*
+/usr/lib/eupnea/*
 
 %{_sysconfdir}/eupnea/*
 
