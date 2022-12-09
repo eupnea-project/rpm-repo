@@ -18,21 +18,29 @@ git clone --depth=1 https://github.com/eupnea-linux/audio-scripts.git
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
+mkdir -p %{buildroot}/%{_libdir}/eupnea
 mkdir -p %{buildroot}/%{_sysconfdir}/eupnea
-install -m 755 postinstall-scripts/scripts/* %{buildroot}/%{_bindir}/
+
+# Copy scripts to bin
+install -m 755 postinstall-scripts/user-scripts/* %{buildroot}/%{_bindir}/
 install -m 755 audio-scripts/setup-audio %{buildroot}/%{_bindir}/
+
+# Copy scripts to lib
+cp postinstall-scripts/system-scripts/* %{buildroot}/%{_libdir}/eupnea/
+cp postinstall-scripts/functions.py %{buildroot}/%{_libdir}/eupnea/
+
 cp -r postinstall-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 
 %files
 %{_bindir}/collect-logs
-%{_bindir}/functions.py
 %{_bindir}/install-to-internal
 %{_bindir}/manage-kernels
 %{_bindir}/modify-cmdline
-%{_bindir}/postinstall
 %{_bindir}/setup-audio
-%{_sysconfdir}/eupnea/
 
+%{_libdir}/eupnea/*
+
+%{_sysconfdir}/eupnea/*
 
 %changelog
