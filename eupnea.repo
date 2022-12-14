@@ -1,5 +1,5 @@
-[eupnea-utils]
-name=Eupnea-utils rpm repository
+[eupnea]
+name=Eupnea packages rpm repository
 baseurl=https://eupnea-linux.github.io/rpm-repo/
 gpgkey=https://eupnea-linux.github.io/rpm-repo/public_key.gpg
 enabled=1
