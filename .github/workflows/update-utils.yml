@@ -82,15 +82,11 @@ jobs:
           # Exit in case the branch doesn't exist yet
           git clone --branch=gh-pages https://github.com/eupnea-linux/rpm-repo /tmp/rpm-repo || exit 0
           
-          # Copy old repo to current directory
-          cp -r /tmp/rpm-repo/repodata .
+          # Copy system rpms to current directory
           cp -r /tmp/rpm-repo/*.rpm .
           
-          # Delete old system packages
+          # Delete old util packages
           rm -rf ./eupnea-utils*.rpm
-
-          # Delete all repodata signatures
-          rm -rf repodata/*.sig
 
       - name: Creating repo
         run: bash create-repo.sh
