@@ -11,9 +11,9 @@ This package contains a set of tools to interact with EupneaOS/Depthboot systems
 Not recommended for use on non-Chromebook devices.
 
 %prep
-git clone --depth=1 https://github.com/eupnea-linux/postinstall-scripts.git --branch=move-to-packages
+git clone --depth=1 https://github.com/eupnea-linux/postinstall-scripts.git
 git clone --depth=1 https://github.com/eupnea-linux/audio-scripts.git
-git clone --depth=1 https://github.com/eupnea-linux/systemd-services --branch=move-to-packages
+git clone --depth=1 https://github.com/eupnea-linux/systemd-services
 
 %build
 
