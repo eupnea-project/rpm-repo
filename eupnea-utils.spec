@@ -60,6 +60,6 @@ cp systemd-services/eupnea-update.timer %{buildroot}/%{_sysconfdir}/systemd/syst
 
 # Enable new systemd services
 systemctl enable eupnea-update.timer
-systemctl enable eupnea-postinstall.service
+systemctl enable eupnea-postinstall.timer
 
 %changelog
