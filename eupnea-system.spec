@@ -36,5 +36,3 @@ cp system-update/depthboot_updates.py %{buildroot}/tmp/eupnea-system-update
 
 # This executes the system-update.py script in /tmp/eupnea-system-update after install or update
 /tmp/eupnea-system-update/system-update.py
-
-%changelog
