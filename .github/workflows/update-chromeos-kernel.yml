@@ -61,7 +61,7 @@ jobs:
           sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel.spec # update version in spec file
 
       - name: Packing rpm package
-        run: rpmbuild -bb eupnea-chromeos-kernel.spec
+        run: sudo rpmbuild -bb eupnea-chromeos-kernel.spec
 
       - name: Downloading old repo
         run: |
