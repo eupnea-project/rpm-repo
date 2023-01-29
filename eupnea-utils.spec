@@ -45,7 +45,7 @@ cp postinstall-scripts/systemd-services/eupnea-postinstall.service %{buildroot}/
 %{_bindir}/modify-cmdline
 %{_bindir}/setup-audio
 
-/usr/lib/eupnea/*
+/usr/lib/eupnea/
 
-%{_sysconfdir}/eupnea/*
+%{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service

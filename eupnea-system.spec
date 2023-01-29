@@ -29,7 +29,7 @@ cp system-update/eupnea_os_updates.py %{buildroot}/tmp/eupnea-system-update
 cp system-update/depthboot_updates.py %{buildroot}/tmp/eupnea-system-update
 
 %files
-/tmp/eupnea-system-update/*
+/tmp/eupnea-system-update/
 
 %post
 #!/bin/sh
