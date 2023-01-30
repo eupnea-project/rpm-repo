@@ -33,14 +33,15 @@ tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 # Copy kernel to tmp location
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 
-# Symlink kernel headers
-ln -s /usr/src/linux-headers-"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ /lib/modules/"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
-
 %files
 /*
 
 %post
 #!/bin/sh
+
+# Symlink kernel headers
+# The bash scriptlet reads the kernel version from the bzImage file that was packed with the package
+ln -s /usr/src/linux-headers-"$(file -bL /tmp/eupnea-kernel-update/bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ /lib/modules/"$(file -bL /tmp/eupnea-kernel-update/bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
 
 # Flash the kernel
 /usr/lib/eupnea/install-kernel /tmp/eupnea-kernel-update/bzImage
