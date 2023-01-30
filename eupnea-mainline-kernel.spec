@@ -31,10 +31,7 @@ tar xfpJ modules.tar.xz -C %{buildroot}/lib/modules
 tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 
 # Read kernel version
-echo "start"
-echo "$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"
-echo "end"
-%global kernel_version %(echo "$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)")
+%global kernel_version %(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)
 
 # Copy kernel to tmp location
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
