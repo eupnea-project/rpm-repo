@@ -34,10 +34,10 @@ tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 
 # Symlink kernel headers
-ln -s %{buildroot}/usr/src/linux-headers-"$(file -bL ../bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ %{buildroot}/lib/modules/"$(file -bL ../bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
+ln -s %{buildroot}/usr/src/linux-headers-"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ %{buildroot}/lib/modules/"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
 
 %files
-/*
+#/*
 
 %post
 #!/bin/sh
