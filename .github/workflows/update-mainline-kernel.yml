@@ -61,7 +61,7 @@ jobs:
           sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-mainline-kernel.spec # update version in spec file
 
       - name: Packing rpm package
-        run: sudo rpmbuild -bb eupnea-mainline-kernel.spec
+        run: rpmbuild -bb eupnea-mainline-kernel.spec
 
       - name: Downloading old repo
         run: |
