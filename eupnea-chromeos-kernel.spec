@@ -30,18 +30,14 @@ mkdir -p %{buildroot}/tmp/eupnea-kernel-update
 tar xfpJ modules.tar.xz -C %{buildroot}/lib/modules
 tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 
-# Read kernel version
-%global kernel_version %(echo "$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)")
-
 # Copy kernel to tmp location
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 
 # Symlink kernel headers
-ln -s %{buildroot}/usr/src/linux-headers-%{kernel_version}/ %{buildroot}/lib/modules/%{kernel_version}/build
+ln -s %{buildroot}/usr/src/linux-headers-"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ %{buildroot}/lib/modules/"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
 
 %files
-/usr/src/linux-headers-%{kernel_version}/
-/lib/modules/%{kernel_version}/
+/*
 
 %post
 #!/bin/sh

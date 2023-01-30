@@ -37,7 +37,7 @@ cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 ln -s %{buildroot}/usr/src/linux-headers-"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ %{buildroot}/lib/modules/"$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
 
 %files
-#/*
+/*
 
 %post
 #!/bin/sh
