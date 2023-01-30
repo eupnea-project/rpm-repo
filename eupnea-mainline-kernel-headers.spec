@@ -26,5 +26,5 @@ tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 #!/bin/sh
 
 # Symlink kernel headers
-# The bash scriptlet reads the kernel version from the bzImage file that was packed with the package
-ln -s /usr/src/linux-headers-"$(file -bL /tmp/eupnea-kernel-update/bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/ /lib/modules/"$(file -bL /tmp/eupnea-kernel-update/bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2)"/build
+# The github workflow will replace insert_version with the correct kernel version
+ln -s /usr/src/linux-headers-insert_version/ /lib/modules/insert_version/build
