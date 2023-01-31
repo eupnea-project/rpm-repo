@@ -20,4 +20,4 @@ mkdir -p %{buildroot}/lib/modules
 tar xfpJ modules.tar.xz -C %{buildroot}/lib/modules
 
 %files
-/*
+/lib/modules/insert_version

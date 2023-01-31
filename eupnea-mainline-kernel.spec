@@ -5,7 +5,7 @@ Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 Conflicts:  eupnea-chromeos-kernel
-Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers
+Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers eupnea-utils
 
 %description
 WARNING: This package will overwrite the first partition of your current drive!
@@ -24,7 +24,7 @@ mkdir -p %{buildroot}/tmp/eupnea-kernel-update
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 
 %files
-/*
+/tmp/eupnea-kernel-update/bzImage
 
 %post
 #!/bin/sh

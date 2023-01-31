@@ -21,7 +21,7 @@ mkdir -p %{buildroot}/usr/src
 tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 
 %files
-/*
+/usr/src/linux-headers-insert_version
 
 %post
 #!/bin/sh
