@@ -5,7 +5,7 @@ Summary:    Eupnea ChromeOS kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 Conflicts:  eupnea-mainline-kernel
-Requires:    eupnea-chromeos-kernel-modules eupnea-chromeos-headers
+Requires:    eupnea-chromeos-kernel-modules eupnea-chromeos-kernel-headers
 
 %description
 WARNING: This package will overwrite the first partition of your current drive!

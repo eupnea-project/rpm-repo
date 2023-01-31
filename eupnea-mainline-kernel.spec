@@ -5,7 +5,7 @@ Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 Conflicts:  eupnea-chromeos-kernel
-Requires:    eupnea-mainline-kernel-modules eupnea-mainline-headers
+Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers
 
 %description
 WARNING: This package will overwrite the first partition of your current drive!
