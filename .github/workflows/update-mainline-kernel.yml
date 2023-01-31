@@ -77,8 +77,8 @@ jobs:
           # download bzImage
           curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/download/dev-build/bzImage -o bzImage
           KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
-          sed -i 's/insert_version/$KERNEL_VERSION/g' eupnea-mainline-kernel-headers.spec # replace version in spec file
           sed -i 's/insert_version/$KERNEL_VERSION/g' eupnea-mainline-kernel-modules.spec # replace version in spec file
+          sed -i 's/insert_version/$KERNEL_VERSION/g' eupnea-mainline-kernel-headers.spec # replace version in spec file
 
       - name: Packing kernel package
         run: rpmbuild -bb eupnea-mainline-kernel.spec
