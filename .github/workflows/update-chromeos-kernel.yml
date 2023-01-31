@@ -59,7 +59,13 @@ jobs:
           CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
           sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel.spec # update version in spec file
-          
+
+      - name: Bump version in modules spec file
+        run: |
+          CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel-modules.spec | sed 's/.*://' | xargs) # get current version from spec file
+          NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel-modules.spec # update version in spec file
+
       - name: Bump version in headers spec file
         run: |
           CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel-headers.spec | sed 's/.*://' | xargs) # get current version from spec file
@@ -76,6 +82,9 @@ jobs:
       - name: Packing kernel package
         run: rpmbuild -bb eupnea-chromeos-kernel.spec
 
+      - name: Packing modules package
+        run: rpmbuild -bb eupnea-chromeos-kernel-modules.spec
+
       - name: Packing headers package
         run: rpmbuild -bb eupnea-chromeos-kernel-headers.spec
 
@@ -90,6 +99,7 @@ jobs:
           
           # Delete old chromeos kernel packages
           rm -rf ./eupnea-chromeos-kernel*.rpm
+          rm -rf ./eupnea-chromeos-kernel-modules*.rpm
           rm -rf ./eupnea-chromeos-kernel-headers*.rpm
 
       - name: Setting up rpm repo
@@ -108,7 +118,7 @@ jobs:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Update files in main branch
-          file_pattern: 'eupnea-chromeos-kernel.spec eupnea-chromeos-kernel-headers.spec chromeos_kernel_tag-cache.txt'
+          file_pattern: 'eupnea-chromeos-kernel.spec eupnea-chromeos-kernel-modules.spec eupnea-chromeos-kernel-headers.spec chromeos_kernel_tag-cache.txt'
 
       - name: Deploying system packages
         uses: stefanzweifel/git-auto-commit-action@v4

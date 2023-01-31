@@ -1,10 +1,11 @@
 Name:       eupnea-mainline-kernel
-Version:    1.0.2
+Version:    1.0.1
 Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 Conflicts:  eupnea-chromeos-kernel
+Requires:    eupnea-mainline-kernel-modules eupnea-mainline-headers
 
 %description
 WARNING: This package will overwrite the first partition of your current drive!
@@ -13,19 +14,11 @@ This package contains the Eupnea Mainline kernel. It is only compatible with x86
 
 %prep
 #curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/bzImage -o bzImage
-#curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/modules.tar.xz -o modules.tar.xz
-#curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/headers.tar.xz  -o headers.tar.xz
-
 curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/download/dev-build/bzImage -o bzImage
-curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/download/dev-build/modules.tar.xz -o modules.tar.xz
 
 %install
 # Make dirs
-mkdir -p %{buildroot}/lib/modules
 mkdir -p %{buildroot}/tmp/eupnea-kernel-update
-
-# Unpack tar
-tar xfpJ modules.tar.xz -C %{buildroot}/lib/modules
 
 # Copy kernel to tmp location
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage

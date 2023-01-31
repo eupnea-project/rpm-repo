@@ -4,6 +4,7 @@ Release:    1%{?dist}
 Summary:    Eupnea ChromeOS kernel headers
 License:    GPLv3+
 ExclusiveArch:   x86_64
+Requires:    eupnea-chromeos-kernel-modules
 
 %description
 This package contains the Eupnea ChromeOS kernel headers. It is only compatible with Eupnea ChromeOS kernels.

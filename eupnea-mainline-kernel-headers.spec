@@ -4,6 +4,7 @@ Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel headers
 License:    GPLv3+
 ExclusiveArch:   x86_64
+Requires:    eupnea-mainline-kernel-modules
 
 %description
 This package contains the Eupnea Mainline kernel headers. It is only compatible with Eupnea Mainline kernels.
