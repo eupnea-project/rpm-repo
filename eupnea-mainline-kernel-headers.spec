@@ -1,5 +1,5 @@
 Name:       eupnea-mainline-kernel-headers
-Version:    1.0.7
+Version:    1.0.8
 Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel headers
 License:    GPLv3+
