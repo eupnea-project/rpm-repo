@@ -1,5 +1,5 @@
 Name:       eupnea-mainline-kernel-modules
-Version:    1.0.7
+Version:    1.0.8
 Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel
 License:    GPLv3+
