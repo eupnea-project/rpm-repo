@@ -52,7 +52,7 @@ jobs:
 
       - name: Update local tag releases cache file
         run: |
-          echo "${{ needs.check-sha.outputs.remote_sha }}" > chromeos_kernel_tag-cache.txt
+          echo "${{ needs.check-sha.outputs.remote_tag }}" > chromeos_kernel_tag-cache.txt
 
       - name: Bump version in kernel spec file
         run: |
