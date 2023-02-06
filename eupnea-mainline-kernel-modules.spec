@@ -4,6 +4,7 @@ Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
+Conflicts:  eupnea-chromeos-kernel-modules
 
 %description
 This package contains the Eupnea Mainline kernel modules. It is only compatible with Eupnea Mainline kernels.
