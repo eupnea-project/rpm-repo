@@ -4,7 +4,6 @@ Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel headers
 License:    GPLv3+
 ExclusiveArch:   x86_64
-Conflicts:  eupnea-chromeos-kernel-headers
 Requires:    eupnea-mainline-kernel-modules
 
 %description
