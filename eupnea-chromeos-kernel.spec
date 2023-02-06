@@ -1,5 +1,5 @@
 Name:       eupnea-chromeos-kernel
-Version:    1.0.10
+Version:    1.0.11
 Release:    1%{?dist}
 Summary:    Eupnea ChromeOS kernel
 License:    GPLv3+
