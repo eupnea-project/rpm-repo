@@ -30,7 +30,7 @@ jobs:
           latest_sha=$(curl -s https://api.github.com/repos/eupnea-linux/system-update/commits/main | jq -r '.sha')
           
           # Check remote sha against cached one
-          match_results=$([[ "$(cat system_sha-cache.txt)" == "$latest_sha" ]] && echo "true" || echo "false")
+          match_results=$([[ "$(cat cache/system_sha-cache.txt)" == "$latest_sha" ]] && echo "true" || echo "false")
           echo "match_results=$match_results" >> $GITHUB_OUTPUT
           
           # Add sha to output
@@ -52,16 +52,16 @@ jobs:
 
       - name: Update local commits sha file
         run: |
-          echo "${{ needs.check-sha.outputs.remote_sha }}" > system_sha-cache.txt
+          echo "${{ needs.check-sha.outputs.remote_sha }}" > cache/system_sha-cache.txt
 
       - name: Bump version in spec file
         run: |
-          CURRENT_VERSION=$(sed -n '2p' eupnea-system.spec | sed 's/.*://' | xargs) # get current version from spec file
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupnea-system.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
-          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-system.spec # update version in spec file
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupnea-system.spec # update version in spec file
 
       - name: Packing rpm package
-        run: rpmbuild -bb eupnea-system.spec
+        run: rpmbuild -bb spec-files/eupnea-system.spec
 
       - name: Downloading old repo
         run: |
@@ -84,7 +84,7 @@ jobs:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Update files in main branch
-          file_pattern: 'eupnea-system.spec system_sha-cache.txt'
+          file_pattern: 'spec-files/eupnea-system.spec cache/system_sha-cache.txt'
 
       - name: Deploying system packages
         uses: stefanzweifel/git-auto-commit-action@v4

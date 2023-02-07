@@ -33,8 +33,8 @@ jobs:
           audio_latest_sha=$(curl -s https://api.github.com/repos/eupnea-linux/audio-scripts/commits/main | jq -r '.sha')
           
           # Check remote shas against cached ones
-          postinstall_match_results=$([[ "$(cat utils_sha-cache.txt | head -1)" == "$postinstall_latest_sha" ]] && echo "true" || echo "false")
-          audio_match_results=$([[ "$(cat utils_sha-cache.txt | tail -1)" == "$audio_latest_sha" ]] && echo "true" || echo "false")
+          postinstall_match_results=$([[ "$(cat cache/utils_sha-cache.txt | head -1)" == "$postinstall_latest_sha" ]] && echo "true" || echo "false")
+          audio_match_results=$([[ "$(cat cache/utils_sha-cache.txt | tail -1)" == "$audio_latest_sha" ]] && echo "true" || echo "false")
           
           # Compare results and determine if there was an update in any of the repos
           if [[ "$postinstall_match_results" == "true" && "$audio_match_results" == "true" ]]; then
@@ -63,16 +63,16 @@ jobs:
 
       - name: Update local commits sha file
         run: |
-          echo "${{ needs.check-sha.outputs.postinstall_remote_sha }}"$'\n'"${{ needs.check-sha.outputs.audio_remote_sha }}" > utils_sha-cache.txt
+          echo "${{ needs.check-sha.outputs.postinstall_remote_sha }}"$'\n'"${{ needs.check-sha.outputs.audio_remote_sha }}" > cache/utils_sha-cache.txt
 
       - name: Bump version in spec file
         run: |
-          CURRENT_VERSION=$(sed -n '2p' eupnea-utils.spec | sed 's/.*://' | xargs) # get current version from spec file
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupnea-utils.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
-          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-utils.spec # update version in spec file
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupnea-utils.spec # update version in spec file
 
       - name: Packing rpm package
-        run: rpmbuild -bb eupnea-utils.spec
+        run: rpmbuild -bb spec-files/eupnea-utils.spec
 
       - name: Downloading old repo
         run: |
@@ -96,7 +96,7 @@ jobs:
           # Defaults to "Apply automatic changes"
           commit_message: Update files in main branch
           # Only include needed files
-          file_pattern: 'eupnea-utils.spec utils_sha-cache.txt'
+          file_pattern: 'spec-files/eupnea-utils.spec cache/utils_sha-cache.txt'
 
       - name: Deploying utils packages
         uses: stefanzweifel/git-auto-commit-action@v4

@@ -30,7 +30,7 @@ jobs:
           latest_tag=$(curl -s https://api.github.com/repos/eupnea-linux/chromeos-kernel/releases/latest | jq -r '.tag_name')
           
           # Check remote tag against cached one
-          match_results=$([[ "$(cat chromeos_kernel_tag-cache.txt)" == "$latest_tag" ]] && echo "true" || echo "false")
+          match_results=$([[ "$(cat cache/chromeos_kernel_tag-cache.txt)" == "$latest_tag" ]] && echo "true" || echo "false")
           echo "match_results=$match_results" >> $GITHUB_OUTPUT
           
           # Add sha to output
@@ -52,42 +52,42 @@ jobs:
 
       - name: Update local tag releases cache file
         run: |
-          echo "${{ needs.check-sha.outputs.remote_tag }}" > chromeos_kernel_tag-cache.txt
+          echo "${{ needs.check-sha.outputs.remote_tag }}" > cache/chromeos_kernel_tag-cache.txt
 
       - name: Bump version in kernel spec file
         run: |
-          CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel.spec | sed 's/.*://' | xargs) # get current version from spec file
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupnea-chromeos-kernel.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
-          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel.spec # update version in spec file
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupnea-chromeos-kernel.spec # update version in spec file
 
       - name: Bump version in modules spec file
         run: |
-          CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel-modules.spec | sed 's/.*://' | xargs) # get current version from spec file
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupnea-chromeos-kernel-modules.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
-          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel-modules.spec # update version in spec file
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupnea-chromeos-kernel-modules.spec # update version in spec file
 
       - name: Bump version in headers spec file
         run: |
-          CURRENT_VERSION=$(sed -n '2p' eupnea-chromeos-kernel-headers.spec | sed 's/.*://' | xargs) # get current version from spec file
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupnea-chromeos-kernel-headers.spec | sed 's/.*://' | xargs) # get current version from spec file
           NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
-          sed -i "2s/.*/Version:    ${NEXTVERSION}/" eupnea-chromeos-kernel-headers.spec # update version in spec file
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupnea-chromeos-kernel-headers.spec # update version in spec file
 
       - name: Add kernel version to spec files
         run: |
           # download bzImage
           curl --silent -L https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/bzImage -o bzImage
           KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
-          sed -i "s/insert_version/$KERNEL_VERSION/g" eupnea-chromeos-kernel-headers.spec # replace version in spec file
-          sed -i "s/insert_version/$KERNEL_VERSION/g" eupnea-chromeos-kernel-modules.spec # replace version in spec file
+          sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-chromeos-kernel-headers.spec # replace version in spec file
+          sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-chromeos-kernel-modules.spec # replace version in spec file
 
       - name: Packing kernel package
-        run: rpmbuild -bb eupnea-chromeos-kernel.spec
+        run: rpmbuild -bb spec-files/eupnea-chromeos-kernel.spec
 
       - name: Packing modules package
-        run: rpmbuild -bb eupnea-chromeos-kernel-modules.spec
+        run: rpmbuild -bb spec-files/eupnea-chromeos-kernel-modules.spec
 
       - name: Packing headers package
-        run: rpmbuild -bb eupnea-chromeos-kernel-headers.spec
+        run: rpmbuild -bb spec-files/eupnea-chromeos-kernel-headers.spec
 
       - name: Downloading old repo
         run: |
@@ -111,8 +111,8 @@ jobs:
           # download bzImage
           curl --silent -L https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/bzImage -o bzImage
           KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
-          sed -i "s/$KERNEL_VERSION/insert_version/g" eupnea-chromeos-kernel-headers.spec # replace version in spec file
-          sed -i "s/$KERNEL_VERSION/insert_version/g" eupnea-chromeos-kernel-modules.spec # replace version in spec file
+          sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-chromeos-kernel-headers.spec # replace version in spec file
+          sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-chromeos-kernel-modules.spec # replace version in spec file
 
       - name: Updating files in main branch
         uses: stefanzweifel/git-auto-commit-action@v4
@@ -120,7 +120,7 @@ jobs:
           # Optional. Commit message for the created commit.
           # Defaults to "Apply automatic changes"
           commit_message: Update files in main branch
-          file_pattern: 'eupnea-chromeos-kernel.spec eupnea-chromeos-kernel-modules.spec eupnea-chromeos-kernel-headers.spec chromeos_kernel_tag-cache.txt'
+          file_pattern: 'spec-files/eupnea-chromeos-kernel.spec spec-files/eupnea-chromeos-kernel-modules.spec spec-files/eupnea-chromeos-kernel-headers.spec cache/chromeos_kernel_tag-cache.txt'
 
       - name: Deploying system packages
         uses: stefanzweifel/git-auto-commit-action@v4
