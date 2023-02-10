@@ -1,5 +1,5 @@
 Name:       eupnea-system
-Version:    1.0.24
+Version:    1.0.25
 Release:    1%{?dist}
 Summary:    Eupnea system updater
 License:    GPLv3+
