@@ -4,7 +4,9 @@ Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
-Conflicts:  eupnea-chromeos-kernel
+# dnf is protecting currently running kernels and will therefore refuse to uninstall the conflicting package
+# A systemd service was implemented instead which will delete the non-booted kernel on the next reboot
+# Conflicts:  eupnea-chromeos-kernel
 Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers eupnea-utils
 
 %description
@@ -19,6 +21,7 @@ curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/downlo
 %install
 # Make dirs
 mkdir -p %{buildroot}/tmp/eupnea-kernel-update
+mkdir -p %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service
 
 # Copy kernel to tmp location
 cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
@@ -31,3 +34,6 @@ cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
 
 # Flash the kernel
 /usr/lib/eupnea/install-kernel /tmp/eupnea-kernel-update/bzImage
+
+# Install systemd service for kernel cleanup on next reboot
+cp eupnea-kernel-autoremove.service %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service
