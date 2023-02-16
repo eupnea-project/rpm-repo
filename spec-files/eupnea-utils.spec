@@ -1,5 +1,5 @@
 Name:       eupnea-utils
-Version:    1.1.30
+Version:    1.1.31
 Release:    1%{?dist}
 Summary:    Eupnea utilities
 License:    GPLv3+
