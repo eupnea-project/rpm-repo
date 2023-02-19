@@ -39,4 +39,4 @@ cp bzImage %{buildroot}/boot/vmlinuz-eupnea-chromeos
 /usr/lib/eupnea/install-kernel /boot/vmlinuz-eupnea-chromeos
 
 # Install systemd service for kernel cleanup on next reboot
-cp eupnea-kernel-autoremove.service %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service
+cp /etc/eupnea/systemd-services/dnf-kernel-autoremove.service /usr/lib/systemd/system/eupnea-kernel-autoremove.service
