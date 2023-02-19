@@ -5,6 +5,8 @@ Summary:    Eupnea Mainline kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 
+%define _build_id_links none
+
 %description
 This package contains the Eupnea Mainline kernel modules. It is only compatible with Eupnea Mainline kernels.
 

@@ -9,6 +9,8 @@ ExclusiveArch:   x86_64
 # Conflicts:  eupnea-chromeos-kernel
 Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers eupnea-utils
 
+%define _build_id_links none
+
 %description
 WARNING: This package will overwrite the first partition of your current drive!
 Only use it on Chromebooks running Eupnea systems!
@@ -20,20 +22,21 @@ curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/downlo
 
 %install
 # Make dirs
-mkdir -p %{buildroot}/tmp/eupnea-kernel-update
+mkdir -p %{buildroot}/boot
 mkdir -p %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service
 
-# Copy kernel to tmp location
-cp bzImage %{buildroot}/tmp/eupnea-kernel-update/bzImage
+# Copy kernel to /boot
+cp bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
 
 %files
-/tmp/eupnea-kernel-update/bzImage
+/boot/vmlinuz-eupnea-mainline
+/usr/lib/systemd/system/eupnea-kernel-autoremove.service
 
 %post
 #!/bin/sh
 
 # Flash the kernel
-/usr/lib/eupnea/install-kernel /tmp/eupnea-kernel-update/bzImage
+/usr/lib/eupnea/install-kernel /boot/vmlinuz-eupnea-mainline
 
 # Install systemd service for kernel cleanup on next reboot
 cp eupnea-kernel-autoremove.service %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service

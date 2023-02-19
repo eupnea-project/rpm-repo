@@ -5,6 +5,8 @@ Summary:    Eupnea ChromeOS kernel
 License:    GPLv3+
 ExclusiveArch:   x86_64
 
+%define _build_id_links none
+
 %description
 This package contains the Eupnea ChromeOS kernel modules. It is only compatible with Eupnea ChromeOS kernels.
 
