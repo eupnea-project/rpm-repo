@@ -39,4 +39,5 @@ cp bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
 /usr/lib/eupnea/install-kernel /boot/vmlinuz-eupnea-mainline
 
 # Install systemd service for kernel cleanup on next reboot
-cp /etc/eupnea/systemd-services/dnf-kernel-autoremove.service /usr/lib/systemd/system/eupnea-kernel-autoremove.service
+cp /etc/eupnea/systemd-services/dnf-kernel-autoremove.service /usr/lib/systemd/system/dnf-kernel-autoremove.service
+systemctl enable dnf-kernel-autoremove.service
