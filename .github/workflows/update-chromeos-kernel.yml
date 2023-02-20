@@ -114,6 +114,14 @@ jobs:
           sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-chromeos-kernel-headers.spec # replace version in spec file
           sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-chromeos-kernel-modules.spec # replace version in spec file
 
+      - name: Updating files in main branch
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Update files in main branch
+          file_pattern: 'spec-files/eupnea-chromeos-kernel.spec spec-files/eupnea-chromeos-kernel-modules.spec spec-files/eupnea-chromeos-kernel-headers.spec cache/chromeos_kernel_tag-cache.txt'
+
       - name: Deploying system packages
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -125,11 +133,3 @@ jobs:
           # Only include needed files
           file_pattern: 'repodata/* *.rpm eupnea.repo public_key.gpg'
           push_options: '--force'
-
-      - name: Updating files in main branch
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          # Optional. Commit message for the created commit.
-          # Defaults to "Apply automatic changes"
-          commit_message: Update files in main branch
-          file_pattern: 'spec-files/eupnea-chromeos-kernel.spec spec-files/eupnea-chromeos-kernel-modules.spec spec-files/eupnea-chromeos-kernel-headers.spec cache/chromeos_kernel_tag-cache.txt'
