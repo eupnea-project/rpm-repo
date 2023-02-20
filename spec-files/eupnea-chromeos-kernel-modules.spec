@@ -11,8 +11,8 @@ ExclusiveArch:   x86_64
 This package contains the Eupnea ChromeOS kernel modules. It is only compatible with Eupnea ChromeOS kernels.
 
 %prep
-#curl --silent -L https://github.com/eupnea-linux/chromeos-kernel/releases/latest/download/modules.tar.xz -o modules.tar.xz
-curl --silent -L https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/modules.tar.xz -o modules.tar.xz
+#curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/latest/download/modules.tar.xz
+curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/modules.tar.xz
 
 %install
 # Make dirs

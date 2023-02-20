@@ -17,8 +17,8 @@ Only use it on Chromebooks running Eupnea systems!
 This package contains the Eupnea Mainline kernel. It is only compatible with x86_64 Chromebooks.
 
 %prep
-#curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/bzImage -o bzImage
-curl --silent -L https://github.com/eupnea-linux/mainline-kernel/releases/download/dev-build/bzImage -o bzImage
+#curl --silent -LO https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/bzImage
+curl --silent -LO https://github.com/eupnea-linux/mainline-kernel/releases/download/dev-build/bzImage
 
 %install
 # Make dirs
