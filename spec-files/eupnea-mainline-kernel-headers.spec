@@ -24,6 +24,7 @@ tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 
 %files
 /usr/src/linux-headers-insert_version
+%ghost /lib/modules/insert_version/build
 
 %post
 #!/bin/sh
