@@ -37,6 +37,7 @@ cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 
 # Copy systemd units
 cp postinstall-scripts/configs/systemd-services/eupnea-postinstall.service %{buildroot}/%{_sysconfdir}/systemd/system/
+cp postinstall-scripts/configs/systemd-services/eupnea-update.service %{buildroot}/%{_sysconfdir}/systemd/system/
 
 %files
 %{_bindir}/collect-logs
