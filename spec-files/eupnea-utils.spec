@@ -50,3 +50,4 @@ cp postinstall-scripts/configs/systemd-services/eupnea-update.service %{buildroo
 
 %{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
+%{_sysconfdir}/systemd/system/eupnea-update.service
