@@ -75,7 +75,7 @@ jobs:
       - name: Add kernel version to spec files
         run: |
           # download bzImage
-          curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/bzImage
+          curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/latest/download/bzImage
           KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
           sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-chromeos-kernel-headers.spec # replace version in spec file
           sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-chromeos-kernel-modules.spec # replace version in spec file

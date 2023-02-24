@@ -17,8 +17,7 @@ Only use it on Chromebooks running Eupnea systems!
 This package contains the Eupnea ChromeOS kernel. It is only compatible with x86_64 Chromebooks.
 
 %prep
-#curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/latest/download/bzImage
-curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/download/dev-build/bzImage
+curl --silent -LO https://github.com/eupnea-linux/chromeos-kernel/releases/latest/download/bzImage
 
 %install
 # Make dirs
