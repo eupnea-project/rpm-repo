@@ -42,7 +42,6 @@ cp postinstall-scripts/configs/systemd-services/eupnea-update.service %{buildroo
 %files
 %{_bindir}/collect-logs
 %{_bindir}/install-to-internal
-%{_bindir}/manage-kernels
 %{_bindir}/modify-cmdline
 %{_bindir}/setup-audio
 
