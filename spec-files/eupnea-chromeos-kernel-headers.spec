@@ -1,5 +1,5 @@
 Name:       eupnea-chromeos-kernel-headers
-Version:    1.0.19
+Version:    1.0.20
 Release:    1%{?dist}
 Summary:    Eupnea ChromeOS kernel headers
 License:    GPLv3+
