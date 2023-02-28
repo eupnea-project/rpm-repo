@@ -4,6 +4,7 @@ Release:    1%{?dist}
 Summary:    Eupnea system updater
 License:    GPLv3+
 ExclusiveArch:   x86_64
+Requires:    eupnea-utils >= 1.1.47
 
 %description
 This package upgrades Depthboot/EupneaOS systems to the latest version.
