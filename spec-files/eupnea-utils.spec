@@ -4,7 +4,7 @@ Release:    1%{?dist}
 Summary:    Eupnea utilities
 License:    GPLv3+
 ExclusiveArch:   x86_64
-Requires:    vboot-utils parted rsync git
+Requires:    vboot-utils parted rsync git strace alsa-utils
 
 %description
 This package contains a set of tools to interact with EupneaOS/Depthboot systems.
