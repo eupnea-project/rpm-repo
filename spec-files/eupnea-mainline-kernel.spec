@@ -18,18 +18,27 @@ This package contains the Eupnea Mainline kernel. It is only compatible with x86
 
 %prep
 curl --silent -LO https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/bzImage
+git clone https://github.com/eupnea-linux/rpm-repo.git --depth=1 --branch=main
 
 %install
 # Make dirs
 mkdir -p %{buildroot}/boot
-mkdir -p %{buildroot}/usr/lib/systemd/system/eupnea-kernel-autoremove.service
+mkdir -p %{buildroot}/usr/lib/systemd/system/
+mkdir -p %{buildroot}/usr/lib/eupnea
 
 # Copy kernel to /boot
 cp bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
 
+# Add kernel autoremove script
+cp rpm-repo/configs/kernel-autoremove/autoremove-kernels.sh %{buildroot}/usr/lib/eupnea/autoremove-kernels.sh
+
+# Add kernel autoremove systemd service
+cp rpm-repo/configs/kernel-autoremove/kernel-autoremove.service %{buildroot}/usr/lib/systemd/system/kernel-autoremove.service
+
 %files
 /boot/vmlinuz-eupnea-mainline
-/usr/lib/systemd/system/eupnea-kernel-autoremove.service
+/usr/lib/eupnea/autoremove-kernels.sh
+/usr/lib/systemd/system/kernel-autoremove.service
 
 %post
 #!/bin/sh
@@ -37,6 +46,5 @@ cp bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
 # Flash the kernel
 /usr/lib/eupnea/install-kernel /boot/vmlinuz-eupnea-mainline
 
-# Install systemd service for kernel cleanup on next reboot
-cp /etc/eupnea/systemd-services/dnf-kernel-autoremove.service /usr/lib/systemd/system/dnf-kernel-autoremove.service
-systemctl enable dnf-kernel-autoremove.service
+# Enable kernel autoremove service
+systemctl enable kernel-autoremove.service
