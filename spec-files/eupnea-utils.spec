@@ -48,6 +48,7 @@ cp eupnea-utils/configs/systemd-services/eupnea-update.service %{buildroot}/%{_s
 /usr/lib/eupnea/install-kernel
 /usr/lib/eupnea/modify-packages
 /usr/lib/eupnea/postinstall
+/usr/lib/eupnea/functions.py
 
 %{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
