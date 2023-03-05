@@ -45,7 +45,9 @@ cp eupnea-utils/configs/systemd-services/eupnea-update.service %{buildroot}/%{_s
 %{_bindir}/modify-cmdline
 %{_bindir}/setup-audio
 
-/usr/lib/eupnea/
+/usr/lib/eupnea/install-kernel
+/usr/lib/eupnea/modify-packages
+/usr/lib/eupnea/postinstall
 
 %{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
