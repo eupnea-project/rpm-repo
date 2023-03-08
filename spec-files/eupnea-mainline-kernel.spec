@@ -7,7 +7,7 @@ ExclusiveArch:   x86_64
 # dnf is protecting currently running kernels and will therefore refuse to uninstall the conflicting package
 # A systemd service was implemented instead which will delete the non-booted kernel on the next reboot
 # Conflicts:  eupnea-chromeos-kernel
-Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers eupnea-utils >= 1.1.56
+Requires:    eupnea-mainline-kernel-modules eupnea-mainline-kernel-headers eupnea-utils >= 1.1.59
 
 %define _build_id_links none
 
