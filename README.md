@@ -7,6 +7,10 @@ Repo for Fedora rpm packages. Provides the following packages:
 * `eupnea-system`: Does not install anything per se, but instead includes a postinstall hook, which
   executes [system-update.py](https://github.com/eupnea-linux/system-update) to upgrade between Depthboot/EupneaOS
   versions.
+* `eupnea-mainline-kernel` + `modules` + `headers`: Mainline kernel, modules and headers.
+  See [eupnea-mainline-kernel](https://eupnea-linux.github.io/docs/project/kernels#mainline-eupnea-kernel)
+* `eupnea-chromeos-kernel` + `modules` + `headers`: ChromeOS kernel, modules and headers.
+  See [eupnea-chromeos-kernel](https://eupnea-linux.github.io/docs/project/kernels#chromeos-eupnea-kernel)
 
 # Add to system
 
