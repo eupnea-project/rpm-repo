@@ -36,8 +36,7 @@ cp -r eupnea-utils/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 
 # Copy systemd units
-cp eupnea-utils/configs/systemd-services/eupnea-postinstall.service %{buildroot}/%{_sysconfdir}/systemd/system/
-cp eupnea-utils/configs/systemd-services/eupnea-update.service %{buildroot}/%{_sysconfdir}/systemd/system/
+cp eupnea-utils/configs/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
 
 %files
 %{_bindir}/collect-logs
@@ -53,3 +52,10 @@ cp eupnea-utils/configs/systemd-services/eupnea-update.service %{buildroot}/%{_s
 %{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
 %{_sysconfdir}/systemd/system/eupnea-update.service
+%{_sysconfdir}/systemd/system/touchscreen-fix.service
+
+%post
+#!/bin/sh
+
+# Enable touschreen fix service
+if [ -f /proc/mounts ]; then systemctl enable --now touchscreen-fix.service; fi
