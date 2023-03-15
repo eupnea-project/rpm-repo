@@ -57,5 +57,5 @@ cp eupnea-utils/configs/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/s
 %post
 #!/bin/sh
 
-# Enable touschreen fix service
-if [ -f /proc/mounts ]; then systemctl enable --now touchscreen-fix.service; fi
+# Enable touchscreen fix service
+if [ -f /proc/mounts ]; then systemctl enable --now touchscreen-fix.service; else systemctl enable touchscreen-fix.service; fi
