@@ -36,7 +36,7 @@ cp -r eupnea-utils/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 
 # Copy systemd units
-cp eupnea-utils/configs/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
+cp eupnea-utils/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
 
 %files
 %{_bindir}/collect-logs
