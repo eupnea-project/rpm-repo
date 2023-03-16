@@ -48,6 +48,7 @@ cp eupnea-utils/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
 /usr/lib/eupnea/modify-packages
 /usr/lib/eupnea/postinstall
 /usr/lib/eupnea/functions.py
+/usr/lib/eupnea/fix-touchscreen.sh
 
 %{_sysconfdir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
