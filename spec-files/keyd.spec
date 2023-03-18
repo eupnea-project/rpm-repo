@@ -25,7 +25,7 @@ mkdir -p %{buildroot}/%{_datadir}/libinput
 # TODO: move to %build
 cd keyd-remote
 make
-make %{buildroot} PREFIX='/usr' install
+make DESTDIR=%{buildroot} PREFIX='/usr' install
 cd ..
 
 %files
