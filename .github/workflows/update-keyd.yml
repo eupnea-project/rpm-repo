@@ -47,6 +47,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Installing dependencies
+        run: sudo apt-get install -y rpm createrepo-c
+
       - name: Update local tag releases cache file
         run: |
           echo "${{ needs.check-sha.outputs.remote_tag }}" > cache/keyd-cache.txt
@@ -60,6 +63,21 @@ jobs:
       - name: Packing rpm package
         run: rpmbuild -bb spec-files/eupnea-utils.spec
 
+      - name: Downloading old repo
+        run: |
+          # Download old repo.
+          # Exit in case the branch doesn't exist yet
+          git clone --branch=gh-pages https://github.com/eupnea-linux/rpm-repo /tmp/rpm-repo || exit 0
+          
+          # Copy system rpms to current directory
+          cp -r /tmp/rpm-repo/*.rpm .
+          
+          # Delete old util packages
+          rm -rf ./eupnea-utils*.rpm
+
+      - name: Creating repo
+        run: bash create-repo.sh
+
       - name: Updating files in main branch
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
@@ -72,38 +90,21 @@ jobs:
           # Defaults to "Apply automatic changes"
           commit_message: Update files in main branch
           # Only include needed files
-          file_pattern: 'control-files/keyd-control cache/keyd-cache.txt'
+          file_pattern: 'spec-files/keyd.spec cache/keyd-cache.txt'
 
-      - name: Adding jammy keyd packages
-        uses: smeinecke/apt-repo-action@v2.1.1
+      - name: Deploying utils packages
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repo_supported_arch: |
-            amd64
-            i386 #  32 bit systems arent really supported but apt throws a warning otherwise
-          repo_supported_version: |
-            kinetic
-            jammy
-          file: keyd*.deb
-          file_target_version: jammy
-          public_key: ${{ secrets.PUBLIC }}
-          private_key: ${{ secrets.PRIVATE }}
-          key_passphrase: ""
-          repo_folder: "debian_ubuntu"
+          # Disable setting repo owner as commit author
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
 
-      - name: Adding kinetic keyd packages
-        uses: smeinecke/apt-repo-action@v2.1.1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          repo_supported_arch: |
-            amd64
-            i386 #  32 bit systems arent really supported but apt throws a warning otherwise
-          repo_supported_version: |
-            kinetic
-            jammy
-          file: keyd*.deb
-          file_target_version: kinetic
-          public_key: ${{ secrets.PUBLIC }}
-          private_key: ${{ secrets.PRIVATE }}
-          key_passphrase: ""
-          repo_folder: "debian_ubuntu"
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Deploy util packages
+          branch: gh-pages
+          create_branch: true
+          # Only include needed files
+          file_pattern: 'repodata/* *.rpm eupnea.repo public_key.gpg'
+          push_options: '--force'
