@@ -44,7 +44,7 @@ cp rpm-repo/configs/kernel-autoremove/kernel-autoremove.service %{buildroot}/usr
 #!/bin/sh
 set -e # exit on error
 # Flash the kernel
-/usr/lib/eupnea/install-kernel /boot/vmlinuz-eupnea-chromeos
+/usr/lib/eupnea/install-kernel --kernel-path /boot/vmlinuz-eupnea-chromeos
 
 # Enable kernel autoremove service
 systemctl enable kernel-autoremove.service
