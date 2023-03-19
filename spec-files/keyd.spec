@@ -5,6 +5,8 @@ Summary:    A key remapping daemon for linux.
 License:    MIT
 Url:    https://github.com/rvaiya/keyd
 ExclusiveArch:   x86_64
+BuildRequires: gcc
+Requires: glibc
 
 %description
 Made by rvaiya and repackaged by the Eupnea Project.
@@ -14,6 +16,8 @@ Pulls from the master branch instead of using latest release.
 git clone --depth=1 https://github.com/rvaiya/keyd.git keyd-remote
 
 %build
+cd keyd-remote
+make
 
 %install
 # Make dirs
@@ -22,9 +26,7 @@ mkdir -p %{buildroot}/%{_datadir}/libinput
 # the other dirs are automatically created by make install
 
 # Install with make
-# TODO: move to %build
 cd keyd-remote
-make
 make DESTDIR=%{buildroot} PREFIX='/usr' install
 cd ..
 
