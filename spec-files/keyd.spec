@@ -5,7 +5,7 @@ Summary:    A key remapping daemon for linux.
 License:    MIT
 Url:    https://github.com/rvaiya/keyd
 ExclusiveArch:   x86_64
-BuildRequires: gcc
+BuildRequires: make
 Requires: glibc
 
 %description
