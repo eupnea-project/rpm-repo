@@ -34,9 +34,9 @@ cd ..
 
 /usr/lib/systemd/system/keyd.service
 
-%{_sysconfdir}/keyd # empty dir
+%dir %{_sysconfdir}/keyd
 
-%{buildroot}/%{_datadir} # lots of dirs
+/%{_datadir}/*
 
 %post
 #!/bin/sh
