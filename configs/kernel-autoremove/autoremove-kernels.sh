@@ -6,3 +6,5 @@
 # this is fine, we just want to remove the other kernel
 dnf remove -y eupnea-mainline-kernel || true
 dnf remove -y eupnea-chromeos-kernel || true
+
+systemctl disable kernel-autoremove.service
