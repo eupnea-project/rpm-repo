@@ -61,7 +61,7 @@ jobs:
           sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/keyd.spec # update version in spec file
 
       - name: Packing rpm package
-        run: rpmbuild -bb spec-files/eupnea-utils.spec
+        run: rpmbuild -bb spec-files/keyd.spec
 
       - name: Downloading old repo
         run: |
@@ -73,7 +73,7 @@ jobs:
           cp -r /tmp/rpm-repo/*.rpm .
           
           # Delete old util packages
-          rm -rf ./eupnea-utils*.rpm
+          rm -rf ./keyd*.rpm
 
       - name: Creating repo
         run: bash create-repo.sh
@@ -92,7 +92,7 @@ jobs:
           # Only include needed files
           file_pattern: 'spec-files/keyd.spec cache/keyd-cache.txt'
 
-      - name: Deploying utils packages
+      - name: Deploying keyd packages
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           # Disable setting repo owner as commit author
