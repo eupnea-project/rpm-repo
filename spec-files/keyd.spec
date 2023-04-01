@@ -13,6 +13,7 @@ Pulls from the master branch instead of using latest release.
 
 %prep
 git clone --depth=1 https://github.com/rvaiya/keyd.git keyd-remote
+git clone https://github.com/eupnea-linux/rpm-repo.git --depth=1 --branch=main
 
 %build
 cd keyd-remote
@@ -28,6 +29,11 @@ mkdir -p %{buildroot}/%{_datadir}/libinput
 cd keyd-remote
 make DESTDIR=%{buildroot} PREFIX='/usr' install
 cd ..
+
+# add quirks file
+cp %{buildroot}/arch-repo/configs/keyd.quirks $pkgdir
+cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput/keyd.quirks
+
 
 %files
 %{_bindir}/keyd
