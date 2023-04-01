@@ -12,7 +12,7 @@ Not recommended for use on non-Chromebook devices.
 
 %prep
 git clone --depth=1 https://github.com/eupnea-linux/system-update.git
-git clone --depth=1 https://github.com/eupnea-linux/rpm-repo.git
+git clone --depth=1 --branch=main https://github.com/eupnea-linux/rpm-repo.git
 
 %build
 
