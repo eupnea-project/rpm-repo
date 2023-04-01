@@ -18,7 +18,7 @@ This package contains the Eupnea Mainline kernel. It is only compatible with x86
 
 %prep
 curl --silent -LO https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/bzImage
-git clone https://github.com/eupnea-linux/rpm-repo.git --depth=1 --branch=main
+git clone --depth=1 --branch=main https://github.com/eupnea-linux/rpm-repo.git
 
 %install
 # Make dirs
