@@ -34,7 +34,7 @@ cd ..
 
 # add quirks file
 cp %{buildroot}/arch-repo/configs/keyd.quirks $pkgdir
-cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput/keyd.quirks
+cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput
 
 # add keyboard configs
 cp -r eupnea-utils/configs/* %{buildroot}/%{_datadir}/eupnea/
