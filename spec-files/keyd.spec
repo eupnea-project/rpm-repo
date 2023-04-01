@@ -33,7 +33,6 @@ make DESTDIR=%{buildroot} PREFIX='/usr' install
 cd ..
 
 # add quirks file
-cp %{buildroot}/arch-repo/configs/keyd.quirks $pkgdir
 cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput
 
 # add keyboard configs
