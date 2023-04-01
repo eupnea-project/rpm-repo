@@ -33,7 +33,7 @@ make DESTDIR=%{buildroot} PREFIX='/usr' install
 cd ..
 
 # add quirks file
-cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput
+cp rpm-repo/configs/keyd.quirks %{buildroot}/%{_datadir}/libinput/keyd.quirks
 
 # add keyboard configs
 cp -r eupnea-utils/configs/* %{buildroot}/%{_datadir}/eupnea/
