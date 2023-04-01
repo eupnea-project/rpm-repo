@@ -13,7 +13,8 @@ Pulls from the master branch instead of using latest release.
 
 %prep
 git clone --depth=1 https://github.com/rvaiya/keyd.git keyd-remote
-git clone https://github.com/eupnea-linux/rpm-repo.git --depth=1 --branch=main
+git clone --depth=1 --branch=main https://github.com/eupnea-linux/rpm-repo.git
+git clone --depth=1 https://github.com/eupnea-linux/eupnea-utils.git
 
 %build
 cd keyd-remote
@@ -23,6 +24,7 @@ make
 # Make dirs
 mkdir -p %{buildroot}/usr/lib/systemd/system
 mkdir -p %{buildroot}/%{_datadir}/libinput
+mkdir -p %{buildroot}/%{_datadir}/eupnea
 # the other dirs are automatically created by make install
 
 # Install with make
@@ -34,6 +36,8 @@ cd ..
 cp %{buildroot}/arch-repo/configs/keyd.quirks $pkgdir
 cp rpm-repo/configs/keyd.quirks %{buildroot}/keyd/usr/share/libinput/keyd.quirks
 
+# add keyboard configs
+cp -r eupnea-utils/configs/* %{buildroot}/%{_datadir}/eupnea/
 
 %files
 %{_bindir}/keyd

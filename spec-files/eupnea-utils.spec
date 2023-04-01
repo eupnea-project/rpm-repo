@@ -32,7 +32,6 @@ cp eupnea-utils/system-scripts/* %{buildroot}/usr/lib/eupnea/
 cp eupnea-utils/functions.py %{buildroot}/usr/lib/eupnea/
 
 # Copy configs
-cp -r eupnea-utils/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
 
 # Copy systemd units
