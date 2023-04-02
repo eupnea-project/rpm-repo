@@ -36,7 +36,7 @@ cd ..
 cp rpm-repo/configs/keyd.quirks %{buildroot}/%{_datadir}/libinput/keyd.quirks
 
 # add keyboard configs
-cp -r eupnea-utils/configs/* %{buildroot}/%{_datadir}/eupnea/
+cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
 
 %files
 %{_bindir}/keyd
