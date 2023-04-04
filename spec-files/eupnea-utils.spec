@@ -52,6 +52,7 @@ install -Dm 755 eupnea-utils/configs/fix-touchscreen-on-wakeup.sh %{buildroot}/u
 /usr/lib/eupnea/postinstall
 /usr/lib/eupnea/functions.py
 /usr/lib/eupnea/fix-touchscreen.sh
+/usr/lib/eupnea/set-keymap
 
 /usr/lib/systemd/system-sleep/fix-touchscreen-on-wakeup.sh
 
