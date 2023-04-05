@@ -21,7 +21,7 @@ git clone --depth=1 https://github.com/eupnea-linux/audio-scripts.git
 mkdir -p %{buildroot}/%{_bindir}
 mkdir -p %{buildroot}/usr/lib/eupnea/
 mkdir -p %{buildroot}/usr/lib/systemd/system-sleep/
-mkdir -p %{buildroot}/%{_sysconfdir}/eupnea
+mkdir -p %{buildroot}/%{_datadir}/eupnea
 mkdir -p %{buildroot}/%{_sysconfdir}/systemd/system/
 
 # Copy scripts to bin
@@ -33,7 +33,7 @@ cp eupnea-utils/system-scripts/* %{buildroot}/usr/lib/eupnea/
 cp eupnea-utils/functions.py %{buildroot}/usr/lib/eupnea/
 
 # Copy configs
-cp -r audio-scripts/configs/* %{buildroot}/%{_sysconfdir}/eupnea/
+cp -r audio-scripts/configs/* %{buildroot}/%{_datadir}/eupnea/
 
 # Copy systemd units
 cp eupnea-utils/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
@@ -56,7 +56,7 @@ install -Dm 755 eupnea-utils/configs/fix-touchscreen-on-wakeup.sh %{buildroot}/u
 
 /usr/lib/systemd/system-sleep/fix-touchscreen-on-wakeup.sh
 
-%{_sysconfdir}/eupnea/
+%{_datadir}/eupnea/
 %{_sysconfdir}/systemd/system/eupnea-postinstall.service
 %{_sysconfdir}/systemd/system/eupnea-update.service
 %{_sysconfdir}/systemd/system/touchscreen-fix.service
