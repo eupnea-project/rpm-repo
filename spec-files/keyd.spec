@@ -54,5 +54,6 @@ cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
 # Add keyd to groups
 groupadd keyd
 
-# Enable and start keyd
-systemctl enable --now keyd
+# Enable and start keyd service if not in a chroot
+if [ -f /proc/mounts ]; then systemctl enable --now keyd.service; else systemctl enable keyd.service; fi
+
