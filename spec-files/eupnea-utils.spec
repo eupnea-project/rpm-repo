@@ -65,4 +65,5 @@ install -Dm 755 eupnea-utils/configs/fix-touchscreen-on-wakeup.sh %{buildroot}/u
 #!/bin/sh
 
 # Enable touchscreen fix service
-if [ -f /proc/mounts ]; then systemctl enable --now touchscreen-fix.service; else systemctl enable touchscreen-fix.service; fi
+systemctl enable touchscreen-fix.service
+systemd-detect-virt -r || systemctl start touchscreen-fix.service # systemd-detect-virt -r returns 1 if not in a chroot

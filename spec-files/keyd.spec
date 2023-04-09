@@ -55,5 +55,5 @@ cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
 groupadd keyd
 
 # Enable and start keyd service if not in a chroot
-if [ -f /proc/mounts ]; then systemctl enable --now keyd.service; else systemctl enable keyd.service; fi
-
+systemctl enable keyd.service
+systemd-detect-virt -r || systemctl start keyd.service # systemd-detect-virt -r returns 1 if not in a chroot
