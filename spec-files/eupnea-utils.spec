@@ -33,6 +33,7 @@ cp eupnea-utils/system-scripts/* %{buildroot}/usr/lib/eupnea/
 cp eupnea-utils/functions.py %{buildroot}/usr/lib/eupnea/
 
 # Copy configs
+cp -r eupnea-utils/configs/deep_sleep_block.conf %{buildroot}/%{_datadir}/eupnea/deep_sleep_block.conf # copy deep sleep block config
 cp -r audio-scripts/configs/* %{buildroot}/%{_datadir}/eupnea/
 
 # Copy systemd units
