@@ -1,0 +1,124 @@
+name: Deploying logo packages
+on:
+  schedule:
+    - cron: "20 1 * * *"
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  public_key: ${{ secrets.PUBLIC }}
+  private_key: ${{ secrets.PRIVATE }}
+
+jobs:
+  check-sha:
+    runs-on: ubuntu-latest
+    outputs:
+      match_results: ${{ steps.check-shas.outputs.match_results }}
+      remote_sha: ${{ steps.check-shas.outputs.remote_sha }}
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Download remote commit shas
+        id: check-shas
+        run: |
+          # Download remote sha
+          latest_sha=$(curl -s https://api.github.com/repos/eupnea-linux/logo/commits/main | jq -r '.sha')
+          # fail if curl result is empty
+          if [[ -z "$latest_sha" ]]; then
+              echo "latest_sha is empty"
+              exit 1
+          fi
+          
+          # Check remote sha against cached one
+          match_results=$([[ "$(cat cache/logo-cache.txt)" == "$latest_sha" ]] && echo "true" || echo "false")
+          echo "match_results=$match_results" >> $GITHUB_OUTPUT
+          
+          # Add sha to output
+          echo "remote_sha=$latest_sha" >> $GITHUB_OUTPUT
+
+  deploy-repo:
+    runs-on: ubuntu-latest
+    needs: check-sha # needs for the vars from the previous job
+    # Only run script when remote sha has changed, aka the results DON'T match
+    if: needs.check-sha.outputs.match_results == 'false'
+    steps:
+      - name: Checking out repository code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      - name: Installing dependencies
+        run: sudo apt-get install -y rpm createrepo-c
+
+      - name: Update local commit sha cache file
+        run: |
+          echo "${{ needs.check-sha.outputs.remote_sha }}" > cache/logo-cache.txt
+
+      - name: Bump version in depthboot logo spec file
+        run: |
+          CURRENT_VERSION=$(sed -n '2p' spec-files/depthboot-logo.spec | sed 's/.*://' | xargs) # get current version from spec file
+          NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/depthboot-logo.spec # update version in spec file
+
+      - name: Bump version in eupneaos logo spec file
+        run: |
+          CURRENT_VERSION=$(sed -n '2p' spec-files/eupneaos-logo.spec | sed 's/.*://' | xargs) # get current version from spec file
+          NEXTVERSION=$(echo ${CURRENT_VERSION} | awk -F. -v OFS=. '{$NF += 1 ; print}') # bump version
+          sed -i "2s/.*/Version:    ${NEXTVERSION}/" spec-files/eupneaos-logo.spec # update version in spec file
+
+      - name: Packing depthboot logo package
+        run: rpmbuild -bb spec-files/depthboot-logo.spec
+
+      - name: Packing eupneaos logo package
+        run: rpmbuild -bb spec-files/eupneaos-logo.spec
+
+      - name: Downloading old repo
+        run: |
+          # Download old repo.
+          # Exit in case the branch doesn't exist yet
+          git clone --branch=gh-pages https://github.com/eupnea-linux/rpm-repo /tmp/rpm-repo || exit 0
+          
+          # Copy system rpms to current directory
+          cp -r /tmp/rpm-repo/*.rpm .
+          
+          # Delete old util packages
+          rm -rf ./*logo*.rpm
+
+      - name: Creating repo
+        run: bash create-repo.sh
+
+      - name: Updating files in main branch
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Disable setting repo owner as commit author
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Update files in main branch
+          # Only include needed files
+          file_pattern: 'spec-files/*logo.spec cache/logo-cache.txt'
+
+      - name: Deploying keyd packages
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          # Disable setting repo owner as commit author
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+
+          # Optional. Commit message for the created commit.
+          # Defaults to "Apply automatic changes"
+          commit_message: Deploy util packages
+          branch: gh-pages
+          create_branch: true
+          # Only include needed files
+          file_pattern: 'repodata/* *.rpm eupnea.repo public_key.gpg'
+          push_options: '--force'
