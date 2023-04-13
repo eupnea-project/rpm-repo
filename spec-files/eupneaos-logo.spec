@@ -38,7 +38,7 @@ cp logo/eupnea-boot-splash.service %{buildroot}/usr/lib/systemd/system/eupnea-bo
 %files
 %{_bindir}/busybox-alpine.static
 
-/usr/lib/systemd/eupnea-boot-splash.service
+/usr/lib/systemd/system/eupnea-boot-splash.service
 
 %{buildroot}/%{_datadir}/eupnea/eupnea_boot_logo.ppm
 %{buildroot}/%{_datadir}/eupnea/center-splash.conf
