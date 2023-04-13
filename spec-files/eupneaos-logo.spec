@@ -40,8 +40,8 @@ cp logo/eupnea-boot-splash.service %{buildroot}/usr/lib/systemd/system/eupnea-bo
 
 /usr/lib/systemd/system/eupnea-boot-splash.service
 
-%{buildroot}/%{_datadir}/eupnea/eupnea_boot_logo.ppm
-%{buildroot}/%{_datadir}/eupnea/center-splash.conf
+%{_datadir}/eupnea/eupnea_boot_logo.ppm
+%{_datadir}/eupnea/center-splash.conf
 
 %post
 #!/bin/sh
