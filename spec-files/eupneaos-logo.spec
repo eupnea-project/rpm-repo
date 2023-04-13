@@ -1,5 +1,5 @@
 Name:       eupneaos-logo
-Version:    1.0.0
+Version:    1.0.1
 Release:    1%{?dist}
 Summary:    Alpine busybox-static + eupneaos logo boot splash
 License:    GPLv2
