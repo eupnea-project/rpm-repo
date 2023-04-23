@@ -54,9 +54,9 @@ cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
 # Add keyd to groups
 groupadd keyd
 
-# set keymap
-/usr/lib/eupnea/set-keymap --automatic
-
-# Enable and start keyd service if not in a chroot
+# Enable keyd service
 systemctl enable keyd.service
-systemd-detect-virt -r || systemctl start keyd.service # systemd-detect-virt -r returns 1 if not in a chroot
+
+# use systemd-detect-virt to detect if in chroot -> if not in chroot, set keymap and start keyd
+# systemd-detect-virt -r returns 1 if not in a chroot
+systemd-detect-virt -r || /usr/lib/eupnea/set-keymap --automatic && systemctl start keyd.service
