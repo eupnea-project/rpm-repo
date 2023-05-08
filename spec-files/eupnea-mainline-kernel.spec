@@ -1,5 +1,5 @@
 Name:       eupnea-mainline-kernel
-Version:    1.0.33
+Version:    1.0.34
 Release:    1%{?dist}
 Summary:    Eupnea Mainline kernel
 License:    GPLv3+
