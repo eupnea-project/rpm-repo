@@ -72,7 +72,7 @@ jobs:
         run: |
           # Download old repo.
           # Exit in case the branch doesn't exist yet
-          git clone --branch=gh-pages https://github.com/eupnea-linux/rpm-repo /tmp/rpm-repo || exit 0
+          git clone --branch=gh-pages https://github.com/eupnea-project/rpm-repo /tmp/rpm-repo || exit 0
           
           # Copy system rpms to current directory
           cp -r /tmp/rpm-repo/*.rpm .

@@ -27,7 +27,7 @@ jobs:
         id: check-shas
         run: |
           # Download remote sha
-          latest_sha=$(curl -s https://api.github.com/repos/eupnea-linux/system-update/commits/main | jq -r '.sha')
+          latest_sha=$(curl -s https://api.github.com/repos/eupnea-project/system-update/commits/main | jq -r '.sha')
           # fail if curl result is empty
           if [[ "$latest_sha" = "null" ]]; then
               echo "latest_tag is empty"
@@ -72,7 +72,7 @@ jobs:
         run: |
           # Download old repo.
           # Exit in case the branch doesn't exist yet
-          git clone --branch=gh-pages https://github.com/eupnea-linux/rpm-repo /tmp/rpm-repo || exit 0
+          git clone --branch=gh-pages https://github.com/eupnea-project/rpm-repo /tmp/rpm-repo || exit 0
           
           # Copy util rpms to current directory
           cp -r /tmp/rpm-repo/*.rpm .
