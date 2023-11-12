@@ -26,6 +26,9 @@ jobs:
       - name: Download remote commit shas
         id: check-shas
         run: |
+          # temporarily remove cache check
+          exit 0
+          
           # Download remote sha
           latest_tag=$(curl -s https://api.github.com/repos/eupnea-project/mainline-kernel/releases/latest | jq -r '.tag_name')
           # fail if curl result is empty
