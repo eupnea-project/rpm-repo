@@ -12,7 +12,7 @@ Prints a eupneaos logo on boot using fbsplash from Alpine Linux's busybox-static
 # Download the alpine busybox-static package
 curl -LO https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/busybox-static-1.35.0-r29.apk
 # clone the eupnea logo repo
-git clone --depth=1 https://github.com/eupnea-linux/logo.git eupneaos-logo # different repo name to avoid conflict with previous build
+git clone --depth=1 https://github.com/eupnea-project/logo.git eupneaos-logo # different repo name to avoid conflict with previous build
 
 %install
 # Make dirs

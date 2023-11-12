@@ -12,7 +12,7 @@ Prints a depthboot logo on boot using fbsplash from Alpine Linux's busybox-stati
 # Download the alpine busybox-static package
 curl -LO https://dl-cdn.alpinelinux.org/alpine/v3.17/main/x86_64/busybox-static-1.35.0-r29.apk
 # clone the eupnea logo repo
-git clone --depth=1 https://github.com/eupnea-linux/logo.git
+git clone --depth=1 https://github.com/eupnea-project/logo.git
 
 %install
 # Make dirs

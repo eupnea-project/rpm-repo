@@ -12,7 +12,7 @@ Requires:    eupnea-mainline-kernel-modules
 This package contains the Eupnea Mainline kernel headers. It is only compatible with Eupnea Mainline kernels.
 
 %prep
-curl --silent -LO https://github.com/eupnea-linux/mainline-kernel/releases/latest/download/headers.tar.xz
+curl --silent -LO https://github.com/eupnea-project/mainline-kernel/releases/latest/download/headers.tar.xz
 
 %install
 # Make dirs

@@ -11,8 +11,8 @@ This package contains a set of tools to interact with EupneaOS/Depthboot systems
 Not recommended for use on non-Chromebook devices.
 
 %prep
-git clone --depth=1 https://github.com/eupnea-linux/eupnea-utils.git
-git clone --depth=1 https://github.com/eupnea-linux/audio-scripts.git
+git clone --depth=1 https://github.com/eupnea-project/eupnea-utils.git
+git clone --depth=1 https://github.com/eupnea-project/audio-scripts.git
 
 %build
 

@@ -13,8 +13,8 @@ Pulls from the master branch instead of using latest release.
 
 %prep
 git clone --depth=1 https://github.com/rvaiya/keyd.git keyd-remote
-git clone --depth=1 --branch=main https://github.com/eupnea-linux/rpm-repo.git
-git clone --depth=1 https://github.com/eupnea-linux/eupnea-utils.git
+git clone --depth=1 --branch=main https://github.com/eupnea-project/rpm-repo.git
+git clone --depth=1 https://github.com/eupnea-project/eupnea-utils.git
 
 %build
 cd keyd-remote
