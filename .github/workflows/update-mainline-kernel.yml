@@ -27,7 +27,6 @@ jobs:
         id: check-shas
         run: |
           # temporarily remove cache check
-          echo "match_results=false" >> $GITHUB_OUTPUT
           exit 0
           
           # Download remote sha
