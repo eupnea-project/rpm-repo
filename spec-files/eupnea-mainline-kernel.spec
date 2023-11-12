@@ -17,7 +17,7 @@ Only use it on Chromebooks running Eupnea systems!
 This package contains the Eupnea Mainline kernel. It is only compatible with x86_64 Chromebooks.
 
 %prep
-curl --silent -LO https://github.com/eupnea-project/mainline-kernel/releases/latest/download/bzImage
+curl --silent -LO https://github.com/eupnea-project/mainline-kernel/releases/latest/download/mainline-bzImage
 git clone --depth=1 --branch=main https://github.com/eupnea-project/rpm-repo.git
 
 %install
@@ -27,7 +27,7 @@ mkdir -p %{buildroot}/usr/lib/systemd/system/
 mkdir -p %{buildroot}/usr/lib/eupnea
 
 # Copy kernel to /boot
-cp bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
+cp mainline-bzImage %{buildroot}/boot/vmlinuz-eupnea-mainline
 
 # Add kernel autoremove script
 cp rpm-repo/configs/kernel-autoremove/autoremove-kernels.sh %{buildroot}/usr/lib/eupnea/autoremove-kernels.sh
