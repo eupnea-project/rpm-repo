@@ -1,5 +1,5 @@
 Name:       depthboot-logo
-Version:    1.0.1
+Version:    1.0.2
 Release:    1%{?dist}
 Summary:    Alpine busybox-static + depthboot logo boot splash
 License:    GPLv2
