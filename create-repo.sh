@@ -4,7 +4,7 @@ set -e
 
 # Set gpg rpm signing key id
 echo "%_signature gpg
-%_gpg_name C2FD94D27193AF9D55E351C529CA5218233BC283" >~/.rpmmacros
+%_gpg_name C9C7B7290DB9747C72C310BA6323D07A20625E4D" >~/.rpmmacros
 
 # Dump gpg private key into a file
 echo "$private_key" >gpg-private-key.gpg
