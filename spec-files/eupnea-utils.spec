@@ -12,7 +12,6 @@ Not recommended for use on non-Chromebook devices.
 
 %prep
 git clone --depth=1 https://github.com/eupnea-project/eupnea-utils.git
-git clone --depth=1 https://github.com/eupnea-project/audio-scripts.git
 
 %build
 
@@ -26,7 +25,6 @@ mkdir -p %{buildroot}/%{_sysconfdir}/systemd/system/
 
 # Copy scripts to bin
 install -m 755 eupnea-utils/user-scripts/* %{buildroot}/%{_bindir}/
-install -m 755 audio-scripts/setup-audio %{buildroot}/%{_bindir}/
 
 # Copy scripts to lib
 cp eupnea-utils/system-scripts/* %{buildroot}/usr/lib/eupnea/
@@ -34,7 +32,6 @@ cp eupnea-utils/functions.py %{buildroot}/usr/lib/eupnea/
 
 # Copy configs
 cp -r eupnea-utils/configs/deep_sleep_block.conf %{buildroot}/%{_datadir}/eupnea/deep_sleep_block.conf # copy deep sleep block config
-cp -r audio-scripts/configs/* %{buildroot}/%{_datadir}/eupnea/
 
 # Copy systemd units
 cp eupnea-utils/systemd-services/* %{buildroot}/%{_sysconfdir}/systemd/system/
@@ -46,7 +43,6 @@ install -Dm 755 eupnea-utils/configs/fix-touchscreen-on-wakeup.sh %{buildroot}/u
 %{_bindir}/collect-logs
 %{_bindir}/install-to-internal
 %{_bindir}/modify-cmdline
-%{_bindir}/setup-audio
 
 /usr/lib/eupnea/install-kernel
 /usr/lib/eupnea/modify-packages
