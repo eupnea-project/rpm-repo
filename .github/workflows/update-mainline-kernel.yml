@@ -27,7 +27,7 @@ jobs:
         id: check-shas
         run: |
           # Download remote sha
-          latest_tag=$(curl -s https://api.github.com/repos/eupnea-project/linux-kernels/releases/latest | jq -r '.tag_name')
+          latest_tag=$(curl -s https://api.github.com/repos/eupnea-project/linux-kernels/releases/tags/latest-mainline | jq -r '.id')
           # fail if curl result is empty
           if [[ "$latest_tag" = "null" ]]; then
               echo "latest_tag is empty"
@@ -80,8 +80,8 @@ jobs:
       - name: Add kernel version to spec files
         run: |
           # download bzImage
-          curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/latest/download/mainline-bzImage
-          KERNEL_VERSION=$(file -bL ./mainline-bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
+          curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/download/latest-mainline/bzImage
+          KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
           sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-mainline-kernel-headers.spec # replace version in spec file
           sed -i "s/insert_version/$KERNEL_VERSION/g" spec-files/eupnea-mainline-kernel-modules.spec # replace version in spec file
 
@@ -113,7 +113,7 @@ jobs:
 
       - name: Remove kernel version from spec files
         run: |
-          KERNEL_VERSION=$(file -bL ./mainline-bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
+          KERNEL_VERSION=$(file -bL ./bzImage | grep -o 'version [^ ]*' | cut -d ' ' -f 2) # get kernel version from bzImage
           sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-mainline-kernel-headers.spec # replace version in spec file
           sed -i "s/$KERNEL_VERSION/insert_version/g" spec-files/eupnea-mainline-kernel-modules.spec # replace version in spec file
 

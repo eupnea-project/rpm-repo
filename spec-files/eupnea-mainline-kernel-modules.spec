@@ -11,14 +11,14 @@ ExclusiveArch:   x86_64
 This package contains the Eupnea Mainline kernel modules. It is only compatible with Eupnea Mainline kernels.
 
 %prep
-curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/latest/download/mainline-modules.tar.xz
+curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/download/latest-mainline/modules.tar.xz
 
 %install
 # Make dirs
 mkdir -p %{buildroot}/lib/modules
 
 # Unpack tars
-tar xfpJ mainline-modules.tar.xz -C %{buildroot}/lib/modules
+tar xfpJ modules.tar.xz -C %{buildroot}/lib/modules
 
 %files
 /lib/modules/insert_version

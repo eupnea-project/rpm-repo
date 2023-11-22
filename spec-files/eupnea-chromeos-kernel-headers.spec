@@ -12,14 +12,14 @@ Requires:    eupnea-chromeos-kernel-modules
 This package contains the Eupnea ChromeOS kernel headers. It is only compatible with Eupnea ChromeOS kernels.
 
 %prep
-curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/latest/download/chromeos-headers.tar.xz
+curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/download/latest-chromeos/headers.tar.xz
 
 %install
 # Make dirs
 mkdir -p %{buildroot}/usr/src
 
 # Unpack tar
-tar xfpJ chromeos-headers.tar.xz -C %{buildroot}/usr/src
+tar xfpJ headers.tar.xz -C %{buildroot}/usr/src
 
 %files
 /usr/src/linux-headers-insert_version
