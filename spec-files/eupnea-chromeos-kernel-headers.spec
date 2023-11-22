@@ -12,7 +12,7 @@ Requires:    eupnea-chromeos-kernel-modules
 This package contains the Eupnea ChromeOS kernel headers. It is only compatible with Eupnea ChromeOS kernels.
 
 %prep
-curl --silent -LO https://github.com/eupnea-project/mainline-kernel/releases/latest/download/chromeos-headers.tar.xz
+curl --silent -LO https://github.com/eupnea-project/linux-kernels/releases/latest/download/chromeos-headers.tar.xz
 
 %install
 # Make dirs
