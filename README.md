@@ -22,5 +22,4 @@ Repo for Fedora rpm packages. Provides the following packages:
 ```
 sudo dnf config-manager --add-repo https://eupnea-project.github.io/rpm-repo/eupnea.repo
 sudo dnf update --refresh
-sudo dnf install eupnea-utils eupnea-system
 ```
