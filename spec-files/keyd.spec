@@ -2,7 +2,7 @@ Name:       keyd
 Version:    10.0.40
 Release:    1%{?dist}
 Summary:    A key remapping daemon for linux.
-License:    MIT
+License:    MIT AND BSD-3-Clause
 Url:    https://github.com/rvaiya/keyd
 ExclusiveArch:   x86_64
 # Add builddeps
@@ -15,6 +15,8 @@ Pulls from the master branch instead of using latest release.
 git clone --depth=1 https://github.com/rvaiya/keyd.git keyd-remote
 git clone --depth=1 --branch=main https://github.com/eupnea-project/rpm-repo.git
 git clone --depth=1 https://github.com/eupnea-project/eupnea-utils.git
+git clone --depth=1 https://github.com/weirdtreething/chromebook-linux-audio.git
+
 
 %build
 cd keyd-remote
@@ -37,6 +39,9 @@ cp rpm-repo/configs/keyd.quirks %{buildroot}/%{_datadir}/libinput/keyd.quirks
 
 # add keyboard configs
 cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
+
+# add generations json
+cp weirdtreething/chromebook-linux-audio/boards.json %{buildroot}/%{_datadir}/eupnea/board-generations.json
 
 %files
 %{_bindir}/keyd
