@@ -41,7 +41,7 @@ cp rpm-repo/configs/keyd.quirks %{buildroot}/%{_datadir}/libinput/keyd.quirks
 cp -r eupnea-utils/configs/keyboard-layouts %{buildroot}/%{_datadir}/eupnea/
 
 # add generations json
-cp weirdtreething/chromebook-linux-audio/boards.json %{buildroot}/%{_datadir}/eupnea/board-generations.json
+cp chromebook-linux-audio/conf/boards.json %{buildroot}/%{_datadir}/eupnea/board-generations.json
 
 %files
 %{_bindir}/keyd
