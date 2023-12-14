@@ -13,6 +13,8 @@ Prints a eupneaos logo on boot using fbsplash from Alpine Linux's busybox-static
 package_name=$(curl -L https://dl-cdn.alpinelinux.org/alpine/latest-stable/main/x86_64/ | grep busybox-static-  | awk -F'>' '{print $2}' | awk -F'<' '{print $1}')
 # download the latest alpine busybox package
 curl -LO https://dl-cdn.alpinelinux.org/alpine/latest-stable/main/x86_64/$package_name
+# clone the eupneaos logo repo
+git clone --depth=1 https://github.com/eupnea-project/logo.git eupneaos-logo # different repo name to avoid conflict with previous build
 
 %install
 # Make dirs
